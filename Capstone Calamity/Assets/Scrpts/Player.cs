@@ -8,13 +8,15 @@ public class Player : MonoBehaviour {
 
     public float jumpHeight = 4;
     public float jumpTime = .4f;
-	float gravity = -20;
+    float gravity;
 	float run=10;
-    float jumpspeed = 15;
+    float jumpSpeed;
 	Controller2D controller;
 	// Use this for initialization
 	void Start () {
 		controller = GetComponent<Controller2D> ();
+        gravity = -(2 * jumpHeight) / Mathf.Pow(jumpTime, 2);//derived from kinematic equations. PHYSICS!
+        jumpSpeed = Mathf.Abs(gravity) * jumpTime;
 	}
 	
 	// Update is called once per frame
@@ -26,7 +28,7 @@ public class Player : MonoBehaviour {
 
         if(controller.collisions.below&&Input.GetKeyDown(KeyCode.Space))
         {
-            velocity.y = jumpspeed;
+            velocity.y = jumpSpeed;
         }
 		Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"),Input.GetAxisRaw("Vertical"));
 		velocity.x = input.x * run;
