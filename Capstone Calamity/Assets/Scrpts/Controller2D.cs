@@ -9,6 +9,7 @@ public class Controller2D : MonoBehaviour {
 	const float SKINWIDTH = .015f;
 	public int horizontalRayCount=4;
 	public int verticalRayCount=4;
+    public int hitPoints = 10;
 
     float maxClimbAngle = 80;
     float maxDescendAngle = 75;
@@ -96,6 +97,11 @@ public class Controller2D : MonoBehaviour {
         if (velocity.y != 0)
         {
             VerticalCollisions(ref velocity);
+        }
+        Enemy2 e = GetComponent<Enemy2>();
+        if(e)
+        {
+            //Debug.Log(velocity);
         }
         transform.Translate (velocity);
 	}
@@ -278,5 +284,12 @@ public class Controller2D : MonoBehaviour {
             }
         }
     }
-
+    public void takeDamage(int dmg)
+    {
+       hitPoints -= dmg;
+        if (hitPoints < 0)
+        {
+            hitPoints = 0;
+        }
+    }
 }

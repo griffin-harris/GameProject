@@ -3,8 +3,8 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour {
 	public int HitPoints,damage;
-	public Collider thisCollider;
-	public Collider heroCollider;
+	public Collider2D thisCollider;
+	public Collider2D heroCollider;
 	public float timeSinceLastHit;
 	public float hitTime=.25f;
 
@@ -12,8 +12,8 @@ public class Enemy : MonoBehaviour {
 	void Start () {
 		HitPoints = 3;
 		damage=1;
-		thisCollider = GetComponent<Collider> ();
-		heroCollider= GameObject.FindGameObjectWithTag ("Player").GetComponent<Collider> ();
+		thisCollider = GetComponent<Collider2D> ();
+		heroCollider= GameObject.FindGameObjectWithTag ("Player").GetComponent<Collider2D> ();
 		timeSinceLastHit=0f;
 		
 	}
@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		int collisionResult= CollisionChecker.checkSide(heroCollider,thisCollider);
+        int collisionResult = CollisionChecker.checkSide(heroCollider,thisCollider);
 		PlayerControl pc=GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
 
 		if(collisionResult==CollisionChecker.UP)//if player jumps on top of us
