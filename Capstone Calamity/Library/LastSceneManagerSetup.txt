@@ -1,4 +1,10 @@
 sceneSetups:
-- path: Assets/MovementExample.unity
+- path: Assets/HarmonySDK/Scenes/Demo/DemoPhysics.unity
+  isLoaded: 1
+  isActive: 0
+- path: Assets/HarmonySDK/Scenes/Demo/DemoLighting.unity
+  isLoaded: 1
+  isActive: 0
+- path: Assets/HarmonySDK/Scenes/Demo/DemoLocator.unity
   isLoaded: 1
   isActive: 1
