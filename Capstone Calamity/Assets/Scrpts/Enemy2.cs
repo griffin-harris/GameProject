@@ -12,7 +12,7 @@ public class Enemy2 : MonoBehaviour {
 	{
         myCollider = gameObject.GetComponent<BoxCollider2D>();
         playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<BoxCollider2D>();
-        velocity = new Vector3(-3, -5, 0);
+        velocity = new Vector3();
 	}
 	
 	// Update is called once per frame
@@ -43,5 +43,10 @@ public class Enemy2 : MonoBehaviour {
         
         
 	}
+
+    public virtual void Move()
+    {
+
+    }
 
 }

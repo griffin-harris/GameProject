@@ -4,15 +4,19 @@ using System.Collections;
 [RequireComponent (typeof(Controller2D))]//Doing this ensures the gameobject this is attached to will have a Controller2D
 public class Player : MonoBehaviour {
 
-	Vector3 velocity;
+	public Vector3 velocity;
     public Transform fireball;
     public float jumpHeight = 4;
     public float jumpTime = .4f;
     bool isJumping;
     float gravity;
 	float run=10;
-    float jumpSpeed;
+    public float jumpSpeed;
 	Controller2D controller;
+    public Checkpoint lastCheckPoint;
+    public int maxHitPoint=3;
+
+
 
     float velocityXSmoothing;
 	// Use this for initialization
@@ -20,10 +24,15 @@ public class Player : MonoBehaviour {
 		controller = GetComponent<Controller2D> ();
         gravity = -(2 * jumpHeight) / Mathf.Pow(jumpTime, 2);//derived from kinematic equations. PHYSICS!
         jumpSpeed = Mathf.Abs(gravity) * jumpTime;
+        //velocity.y = jumpSpeed;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        if(controller.hitPoints<=0)
+        {
+            die();
+        }
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
             Fire();
@@ -56,5 +65,26 @@ public class Player : MonoBehaviour {
         //Debug.Log("FIRE!");
         Object fire=Instantiate(fireball,transform.position,new Quaternion());
         //fire.SetParent(transform);
+    }
+
+    public void heal(int hp)
+    {
+        controller.hitPoints += hp;
+        if(controller.hitPoints>maxHitPoint)
+        {
+            controller.hitPoints = maxHitPoint;
+        }
+    }
+    void die()
+    {
+        //Debug.Log("We ded");
+        //Start some dying animation
+        //wait some time... and then
+        if (lastCheckPoint)
+        {
+           // controller.hitPoints = maxHitPoint;
+            lastCheckPoint.respawn();
+           // Debug.Log("respawned");
+        }
     }
 }
